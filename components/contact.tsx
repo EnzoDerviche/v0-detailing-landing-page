@@ -186,7 +186,7 @@ export function Contact() {
           {/* Map */}
           <div className="rounded-lg overflow-hidden border border-border h-[400px] lg:h-auto">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.016887889817!2d-58.38375892357615!3d-34.60373785765058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacb0624ec4d%3A0x3b6b7b8e6b9c1c9c!2sObelisco!5e0!3m2!1ses-419!2sar!4v1699999999999!5m2!1ses-419!2sar"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.1915685137747!2d-58.23109692352402!3d-34.77595236661598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a329b2286b08b9%3A0x8e937f82d088512a!2sDeen%20Garage%20Detailing!5e0!3m2!1ses-419!2sar!4v1775583993833!5m2!1ses-419!2sar"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: "400px" }}
