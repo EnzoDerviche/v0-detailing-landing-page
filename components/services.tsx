@@ -12,6 +12,7 @@ import {
   Shield,
   Gem,
   Sun,
+  Lightbulb,
   ChevronDown,
   ChevronUp,
   Check,
@@ -166,6 +167,23 @@ const services: Service[] = [
       "Enmascarado de zonas sensibles",
       "Pulido en 1 paso",
       "Aplicación de cera de protección",
+    ],
+  },
+  {
+    id: "restauracion-opticas",
+    icon: Lightbulb,
+    title: "Restauración de ópticas",
+    description:
+      "Recuperamos transparencia y brillo en faros opacos o amarillentos, mejorando visibilidad y estética.",
+    price: "$45.000",
+    duration: "1-2 horas",
+    steps: [
+      "Enmascarado de zonas sensibles",
+      "Limpieza y desengrase de la superficie del policarbonato",
+      "Lijado en progresión para eliminar oxidación y micro-rayas",
+      "Aplicacion de polimero liquido para restaurar la transparencia",
+      "Acabado uniforme en ambas ópticas",
+      "3 años de proteccion contra rayos UV",
     ],
   },
 ]
