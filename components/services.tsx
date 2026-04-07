@@ -16,6 +16,7 @@ import {
   ChevronUp,
   Check,
 } from "lucide-react"
+import { openWhatsApp } from "@/hooks/send-whatsapp"
 
 interface Service {
   id: string
@@ -32,32 +33,37 @@ const services: Service[] = [
     id: "lavado-comun",
     icon: Droplets,
     title: "Lavado Común",
-    description: "Lavado exterior completo para mantener tu vehículo limpio día a día.",
-    price: "$XX.XX",
-    duration: "30-45 min",
+    description: "Lavado exterior completo con productos nacionales",
+    price: "$20.000",
+    duration: "1.5-2 horas",
     steps: [
       "Pre-lavado con espuma activa",
       "Lavado manual con guante de microfibra",
       "Enjuague a presión",
       "Secado con paños de microfibra",
       "Limpieza de vidrios exterior",
+      "Aspirado de interior",
+      "Acondicionamiento de superficies",
     ],
   },
   {
     id: "lavado-premium",
     icon: Sparkles,
     title: "Lavado Premium",
-    description: "Lavado completo con atención especial a cada detalle de tu vehículo.",
-    price: "$XX.XX",
-    duration: "1-1.5 hrs",
+    description: "Lavado completo con productos premium internacionales",
+    price: "$35.000",
+    duration: "3-4 horas",
     steps: [
+      "Limpieza de llantas y neumáticos con descontaminación química al detalle",
       "Pre-lavado con espuma activa",
-      "Descontaminación con clay bar",
       "Lavado de dos baldes",
-      "Limpieza de llantas y neumáticos",
+      "Lavado manual con guantes de microfibra",
       "Secado con aire y microfibra",
       "Aplicación de cera rápida",
       "Limpieza de vidrios interior y exterior",
+      "Aspirado de interior",
+      "Limpieza de superficies internas",
+      "Acondicionamiento de superficies",
     ],
   },
   {
@@ -65,30 +71,32 @@ const services: Service[] = [
     icon: Car,
     title: "Limpieza de Interiores",
     description: "Limpieza profunda del interior para un ambiente impecable y fresco.",
-    price: "$XX.XX",
-    duration: "2-3 hrs",
+    price: "$100.000",
+    duration: "3-4 horas",
     steps: [
-      "Aspirado completo de tapizados y alfombras",
-      "Limpieza de plásticos y vinilos",
+      "Desarme completo de butacas",
+      "Limpieza y descontaminacion completa de tapizados",
+      "Aspirado completo de alfombras con aspiradora de alta presión",
+      "Uso de maquina de vapor para limpieza profunda",
+      "Limpieza de plásticos y detalles de interior con productos especializados",
       "Tratamiento de cueros (si aplica)",
-      "Limpieza de vidrios interiores",
-      "Limpieza de tablero y consola",
       "Desodorización del habitáculo",
-      "Acondicionamiento de superficies",
+      "Acondicionamiento de superficies internas con protección contra rayos UV",
+      "Limpieza de vidrios interiores",
     ],
   },
   {
     id: "limpieza-motor",
     icon: Cog,
     title: "Limpieza de Motor",
-    description: "Desengrase y limpieza profesional del compartimiento del motor.",
-    price: "$XX.XX",
+    description: "Desengrase y acondicionamiento del compartimiento del motor.",
+    price: "$35.000",
     duration: "1-1.5 hrs",
     steps: [
       "Protección de componentes eléctricos",
       "Aplicación de desengrasante especializado",
       "Cepillado de superficies",
-      "Enjuague controlado a baja presión",
+      "Enjuague controlado con maquina de vapor",
       "Secado con aire comprimido",
       "Aplicación de protector para plásticos",
     ],
@@ -98,17 +106,16 @@ const services: Service[] = [
     icon: Tag,
     title: "Preparación Preventa",
     description: "Dejamos tu vehículo impecable para conseguir el mejor precio de venta.",
-    price: "$XX.XX",
-    duration: "4-6 hrs",
+    price: "$200.000",
+    duration: "6-8 horas",
     steps: [
       "Lavado premium completo",
-      "Limpieza profunda de interiores",
-      "Pulido de carrocería",
-      "Corrección de pequeños defectos",
+      "Limpieza completa de interior",
+      "Descontaminación completa de carroceria",
+      "Pulido de carrocería en 1 paso (Abrillantado)",
       "Limpieza de motor",
       "Acondicionamiento de plásticos exteriores",
-      "Tratamiento de llantas",
-      "Fotografías profesionales (opcional)",
+      "Fotografías profesionales",
     ],
   },
   {
@@ -116,16 +123,16 @@ const services: Service[] = [
     icon: Shield,
     title: "Tratamiento Acrílico",
     description: "Protección duradera con sellador acrílico de alta resistencia.",
-    price: "$XX.XX",
-    duration: "3-4 hrs",
+    price: "$250.000",
+    duration: "1-2 dias",
     steps: [
-      "Lavado de descontaminación",
-      "Clay bar para remover contaminantes",
-      "Pulido suave de preparación",
+      "Lavado premium completo",
+      'Limpieza basica de interior',
+      "Preparacion y descontaminacion completa de carroceria",
+      "Enmascarado de zonas sensibles",
+      "Pulido completo en 2 pasos",
       "Aplicación de sellador acrílico",
-      "Tiempo de curado",
-      "Pulido final de alto brillo",
-      "Protección con duración de 3-6 meses",
+      "Protección con duración de 6 meses",
     ],
   },
   {
@@ -133,17 +140,16 @@ const services: Service[] = [
     icon: Gem,
     title: "Tratamiento Cerámico",
     description: "La máxima protección para tu pintura con recubrimiento cerámico profesional.",
-    price: "$XX.XX",
+    price: "$300.000",
     duration: "1-2 días",
     steps: [
-      "Lavado de descontaminación completo",
-      "Clay bar y descontaminación química",
-      "Corrección de pintura (pulido en múltiples pasos)",
-      "Limpieza con IPA",
-      "Aplicación de coating cerámico",
-      "Tiempo de curado controlado",
-      "Inspección con luz LED",
-      "Protección con duración de 2-5 años",
+      "Lavado premium completo",
+      'Limpieza basica de interior',
+      "Preparacion y descontaminacion completa de carroceria",
+      "Enmascarado de zonas sensibles",
+      "Pulido completo en 2 pasos",
+      "Aplicación de sellador ceramico",
+      "Protección con duración de 2 años",
     ],
   },
   {
@@ -151,15 +157,14 @@ const services: Service[] = [
     icon: Sun,
     title: "Abrillantado",
     description: "Restauración del brillo original de la pintura mediante pulido profesional.",
-    price: "$XX.XX",
-    duration: "2-4 hrs",
+    price: "$150.000",
+    duration: "6-8 horas",
     steps: [
-      "Lavado de preparación",
+      "Lavado basico completo",
+      'Limpieza basica de interior',
       "Inspección de pintura con luz LED",
       "Enmascarado de zonas sensibles",
-      "Pulido con máquina rotativa/orbital",
-      "Uso de compuestos de corte progresivo",
-      "Pulido final de alto brillo",
+      "Pulido en 1 paso",
       "Aplicación de cera de protección",
     ],
   },
@@ -252,16 +257,11 @@ export function Services() {
             ¿No encontrás lo que buscás? Contactanos para un presupuesto personalizado.
           </p>
           <Button
-            asChild
+            type="button"
+            onClick={openWhatsApp}
             className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            <a
-              href="https://wa.me/TUNUMERO?text=Hola!%20Me%20interesa%20consultar%20por%20un%20servicio%20personalizado"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Consultar por WhatsApp
-            </a>
+            Consultar por WhatsApp
           </Button>
         </div>
       </div>

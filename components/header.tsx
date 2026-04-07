@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { openWhatsApp } from "@/hooks/send-whatsapp"
 
 const navItems = [
   { label: "Inicio", href: "#inicio" },
@@ -77,7 +78,7 @@ export function Header() {
               </a>
             ))}
             <Button 
-              onClick={(e) => scrollToSection(e, "#contacto")}
+              onClick={openWhatsApp}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Reservar Turno
@@ -109,7 +110,10 @@ export function Header() {
                 </a>
               ))}
               <Button 
-                onClick={(e) => scrollToSection(e, "#contacto")}
+                onClick={() => {
+                  openWhatsApp()
+                  setIsOpen(false)
+                }}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
               >
                 Reservar Turno

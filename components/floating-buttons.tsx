@@ -1,6 +1,7 @@
 "use client"
 
 import { Instagram } from "lucide-react"
+import { openWhatsApp } from "@/hooks/send-whatsapp"
 
 const socialButtons = [
   {
@@ -17,7 +18,7 @@ const socialButtons = [
   {
     name: "Instagram",
     icon: Instagram,
-    href: "https://instagram.com/tuinstagram",
+    href: "https://instagram.com/deen.garage",
     bgColor: "bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737]",
     hoverColor: "hover:opacity-90",
   },
@@ -28,7 +29,7 @@ const socialButtons = [
         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
       </svg>
     ),
-    href: "https://tiktok.com/@tutiktok",
+    href: "https://tiktok.com/@deen.garage",
     bgColor: "bg-black",
     hoverColor: "hover:bg-black/80",
   },
@@ -37,18 +38,30 @@ const socialButtons = [
 export function FloatingButtons() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-4">
-      {socialButtons.map((social) => (
-        <a
-          key={social.name}
-          href={social.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl ${social.bgColor} ${social.hoverColor}`}
-          aria-label={social.name}
-        >
-          <social.icon />
-        </a>
-      ))}
+      {socialButtons.map((social) =>
+        social.name === "WhatsApp" ? (
+          <button
+            key={social.name}
+            type="button"
+            onClick={openWhatsApp}
+            className={`flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl ${social.bgColor} ${social.hoverColor}`}
+            aria-label={social.name}
+          >
+            <social.icon />
+          </button>
+        ) : (
+          <a
+            key={social.name}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl ${social.bgColor} ${social.hoverColor}`}
+            aria-label={social.name}
+          >
+            <social.icon />
+          </a>
+        ),
+      )}
     </div>
   )
 }
