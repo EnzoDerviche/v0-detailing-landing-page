@@ -22,7 +22,7 @@ const features = [
 ]
 
 export function Hero() {
-  const smoothScrollTo = (targetPosition: number, duration: number = 800) => {
+  const smoothScrollTo = (targetPosition: number, duration: number = 1200) => {
     const startPosition = window.scrollY
     const distance = targetPosition - startPosition
     let startTime: number | null = null
@@ -53,7 +53,7 @@ export function Hero() {
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
 
-      smoothScrollTo(offsetPosition, 800)
+      smoothScrollTo(offsetPosition, 1200)
     }
   }
 

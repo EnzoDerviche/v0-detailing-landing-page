@@ -29,8 +29,8 @@ const socialButtons = [
       </svg>
     ),
     href: "https://tiktok.com/@tutiktok",
-    bgColor: "bg-foreground",
-    hoverColor: "hover:bg-foreground/80",
+    bgColor: "bg-black",
+    hoverColor: "hover:bg-black/80",
   },
 ]
 
