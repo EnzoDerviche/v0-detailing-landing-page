@@ -1,4 +1,5 @@
-import Link from "next/link"
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Sparkles, Shield, Clock } from "lucide-react"
 
@@ -21,6 +22,21 @@ const features = [
 ]
 
 export function Hero() {
+  const scrollToSection = (href: string) => {
+    const targetId = href.replace("#", "")
+    const element = document.getElementById(targetId)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.scrollY - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Image */}
@@ -48,19 +64,19 @@ export function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              asChild
               size="lg"
+              onClick={() => scrollToSection("#servicios")}
               className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
             >
-              <Link href="#servicios">Ver Servicios</Link>
+              Ver Servicios
             </Button>
             <Button
-              asChild
               size="lg"
               variant="outline"
+              onClick={() => scrollToSection("#contacto")}
               className="border-border text-foreground hover:bg-secondary text-base px-8"
             >
-              <Link href="#contacto">Contactar</Link>
+              Contactar
             </Button>
           </div>
         </div>

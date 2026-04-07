@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -14,29 +13,54 @@ const navItems = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace("#", "")
+    const element = document.getElementById(targetId)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.scrollY - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+    setIsOpen(false)
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2">
+          <a 
+            href="#inicio" 
+            onClick={(e) => scrollToSection(e, "#inicio")}
+            className="flex items-center gap-2"
+          >
             <span className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-foreground">
               DEEN<span className="text-primary">GARAGE</span>
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                onClick={(e) => scrollToSection(e, item.href)}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="#contacto">Reservar Turno</Link>
+            <Button 
+              onClick={(e) => scrollToSection(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#contacto")}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Reservar Turno
             </Button>
           </nav>
 
@@ -55,19 +79,20 @@ export function Header() {
           <nav className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <Link
+                <a
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => scrollToSection(e, item.href)}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 >
                   {item.label}
-                </Link>
+                </a>
               ))}
-              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                <Link href="#contacto" onClick={() => setIsOpen(false)}>
-                  Reservar Turno
-                </Link>
+              <Button 
+                onClick={(e) => scrollToSection(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#contacto")}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+              >
+                Reservar Turno
               </Button>
             </div>
           </nav>
