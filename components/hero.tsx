@@ -22,6 +22,29 @@ const features = [
 ]
 
 export function Hero() {
+  const smoothScrollTo = (targetPosition: number, duration: number = 800) => {
+    const startPosition = window.scrollY
+    const distance = targetPosition - startPosition
+    let startTime: number | null = null
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime
+      const timeElapsed = currentTime - startTime
+      const progress = Math.min(timeElapsed / duration, 1)
+      
+      // Easing function for smooth acceleration and deceleration
+      const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress))
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation)
+      }
+    }
+    
+    requestAnimationFrame(animation)
+  }
+
   const scrollToSection = (href: string) => {
     const targetId = href.replace("#", "")
     const element = document.getElementById(targetId)
@@ -30,10 +53,7 @@ export function Hero() {
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      })
+      smoothScrollTo(offsetPosition, 800)
     }
   }
 

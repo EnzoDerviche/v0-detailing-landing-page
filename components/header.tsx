@@ -13,7 +13,30 @@ const navItems = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const smoothScrollTo = (targetPosition: number, duration: number = 800) => {
+    const startPosition = window.scrollY
+    const distance = targetPosition - startPosition
+    let startTime: number | null = null
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime
+      const timeElapsed = currentTime - startTime
+      const progress = Math.min(timeElapsed / duration, 1)
+      
+      // Easing function for smooth acceleration and deceleration
+      const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress))
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation)
+      }
+    }
+    
+    requestAnimationFrame(animation)
+  }
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
     e.preventDefault()
     const targetId = href.replace("#", "")
     const element = document.getElementById(targetId)
@@ -22,10 +45,7 @@ export function Header() {
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      })
+      smoothScrollTo(offsetPosition, 800)
     }
     setIsOpen(false)
   }
@@ -57,7 +77,7 @@ export function Header() {
               </a>
             ))}
             <Button 
-              onClick={(e) => scrollToSection(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#contacto")}
+              onClick={(e) => scrollToSection(e, "#contacto")}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Reservar Turno
@@ -89,7 +109,7 @@ export function Header() {
                 </a>
               ))}
               <Button 
-                onClick={(e) => scrollToSection(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#contacto")}
+                onClick={(e) => scrollToSection(e, "#contacto")}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
               >
                 Reservar Turno
