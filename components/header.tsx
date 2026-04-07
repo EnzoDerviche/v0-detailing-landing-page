@@ -8,6 +8,7 @@ import { openWhatsApp } from "@/hooks/send-whatsapp"
 const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
+  { label: "Marcas", href: "#marcas" },
   { label: "Contacto", href: "#contacto" },
 ]
 
