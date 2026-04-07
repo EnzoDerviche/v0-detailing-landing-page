@@ -9,7 +9,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-serif text-lg font-semibold tracking-tight text-foreground">
-              DETAILING<span className="text-primary">STUDIO</span>
+              DEEN<span className="text-primary">GARAGE</span>
             </span>
           </div>
 
@@ -35,7 +35,7 @@ export function Footer() {
           </nav>
 
           <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} Detailing Studio. Todos los derechos reservados.
+            &copy; {currentYear} Deen Garage. Todos los derechos reservados.
           </p>
         </div>
       </div>

@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  title: 'Detailing Studio | Cuidado Automotriz Premium',
-  description: 'Servicios profesionales de detailing automotriz. Lavado, limpieza de interiores, tratamientos cerámicos y más.',
+  title: 'Deen Garage | Cuidado Automotriz Premium',
+  description: 'Deen Garage - Servicios profesionales de detailing automotriz. Lavado, limpieza de interiores, tratamientos cerámicos y más.',
   generator: 'v0.app',
   icons: {
     icon: [

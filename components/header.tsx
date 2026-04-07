@@ -20,7 +20,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center gap-2">
             <span className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-foreground">
-              DETAILING<span className="text-primary">STUDIO</span>
+              DEEN<span className="text-primary">GARAGE</span>
             </span>
           </Link>
 
