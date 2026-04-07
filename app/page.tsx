@@ -7,8 +7,53 @@ import { Footer } from "@/components/footer"
 import { FloatingButtons } from "@/components/floating-buttons"
 
 export default function Home() {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000")
+
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoDetailing",
+    name: "Deen Garage",
+    url: siteUrl,
+    telephone: "+54 9 11 2155-5751",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Calle 17 n2878",
+      addressLocality: "Berazategui",
+      addressRegion: "Buenos Aires",
+      addressCountry: "AR",
+    },
+    areaServed: ["Berazategui", "Buenos Aires"],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "18:00",
+        closes: "22:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday", "Sunday"],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
+    sameAs: [
+      "https://instagram.com/deen.garage",
+      "https://tiktok.com/@deen.garage",
+      "https://wa.me/5491121555751",
+    ],
+  }
+
   return (
     <main className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       <Header />
       <Hero />
       <Services />

@@ -5,11 +5,58 @@ import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
 
 export const metadata: Metadata = {
-  title: 'Deen Garage | Cuidado Automotriz Premium',
-  description: 'Deen Garage - Servicios profesionales de detailing automotriz. Lavado, limpieza de interiores, tratamientos cerámicos y más.',
-  generator: 'v0.app',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Deen Garage | Detailing en Berazategui',
+    template: '%s | Deen Garage',
+  },
+  description:
+    'Detailing automotriz en Berazategui, Buenos Aires. Lavado premium, limpieza de interiores, abrillantado, tratamiento acrílico y cerámico.',
+  keywords: [
+    'detailing berazategui',
+    'lavado premium auto berazategui',
+    'tratamiento ceramico berazategui',
+    'abrillantado autos berazategui',
+    'limpieza de interiores auto',
+    'deen garage',
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_AR',
+    url: '/',
+    siteName: 'Deen Garage',
+    title: 'Deen Garage | Detailing en Berazategui',
+    description:
+      'Servicios de detailing automotriz en Berazategui, Buenos Aires. Reservá tu turno por WhatsApp.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Deen Garage | Detailing en Berazategui',
+    description:
+      'Lavado premium, limpieza de interiores, abrillantado y tratamientos de pintura.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  category: 'automotive',
   icons: {
     icon: [
       {
